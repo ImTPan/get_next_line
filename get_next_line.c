@@ -6,28 +6,29 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 21:03:27 by tpan              #+#    #+#             */
-/*   Updated: 2016/12/15 00:35:48 by tpan             ###   ########.fr       */
+/*   Updated: 2016/12/17 20:06:57 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "get_next_line.h"
+
+static t_list		*read_fd(int fd)
+{
+	static t_list	*read_head;
+	t_list			*temp;
+
+	temp = read_head;
+	
+}
 
 int get_next_line(const int fd, char **line)
 {
-	char *ptr_buff;
+	static char *parse = NULL;
+	char		*endl_index;
+	size_t		ret;
 
+	MEMCHECK(!parse && (parse = (char *)(ft_memalloc(sizeof char))) == NULL)
 
-	read(fd,buff,
 
 }
 
-int main (int argc, char *argv[])
-{
-	if (argc != 1)
-	{
-		write(1,"nope", 4);
-	}
-	argv = 0;
-	return (0);
-}
