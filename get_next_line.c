@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 21:03:27 by tpan              #+#    #+#             */
-/*   Updated: 2016/12/17 20:06:57 by tpan             ###   ########.fr       */
+/*   Updated: 2016/12/18 01:21:56 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static t_list		*read_fd(int fd)
 	t_list			*temp;
 
 	temp = read_head;
-	
+	while (temp != '\0')
+	{
+		if (
+	}
 }
 
 int get_next_line(const int fd, char **line)
