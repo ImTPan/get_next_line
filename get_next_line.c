@@ -6,11 +6,12 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 21:03:27 by tpan              #+#    #+#             */
-/*   Updated: 2016/12/19 12:51:09 by tpan             ###   ########.fr       */
+/*   Updated: 2016/12/19 15:29:42 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft/libft.h"
 
 static t_list		*read_fd(int fd)
 {
@@ -32,7 +33,7 @@ static t_list		*read_fd(int fd)
 
 static void			join(t_list *node, char const *buff, size_t size)
 {
-	char	*tmp;
+	char			*tmp;
 
 	if (node->content == NULL)
 	{
@@ -44,19 +45,19 @@ static void			join(t_list *node, char const *buff, size_t size)
 	free((void *)buff);
 }
 
-int	get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
-	char		*ptr;
-	char		buff[BUFF_SIZE];
-	size_t		ret;
-	size_t		i;
-	t_list		*nd;
+	char			*ptr;
+	char			buff[BUFF_SIZE];
+	size_t			ret;
+	size_t			i;
+	t_list			*nd;
 
 	i = 0;
 	ret = 0;
 	MEMCHECK((fd < 0) || (!line) || read(fd, buff, BUFF_SIZE) < 0);
 	nd = read_fd(fd);
-	while (!ft_strchr(nd->content, '\n') && (ret = read(fd, buff,BUFF_SIZE)))
+	while (!ft_strchr(nd->content, '\n') && (ret = read(fd, buff, BUFF_SIZE)))
 		join(nd, ft_strndup(buff, ret), ret);
 	if (ret < BUFF_SIZE && ft_strlen(nd->content) == 0)
 	{
@@ -67,7 +68,7 @@ int	get_next_line(const int fd, char **line)
 	i = ft_wordlength(ptr, i, '\n');
 	*line = (ptr[i] == '\n') ? (ft_strndup(ptr, i)) : (ft_strdup(nd->content));
 	if ((ret == 0 && ptr[i] == 0))
-		ft_bzero(nd->content,(ft_strlen(nd->content)));
+		ft_bzero(nd->content, (ft_strlen(nd->content)));
 	nd->content = (ptr[i] == '\n') ? (ft_strdup(nd->content + (i + 1))) :
 		(nd->content + 0);
 	return (1);
