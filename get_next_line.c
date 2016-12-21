@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 21:03:27 by tpan              #+#    #+#             */
-/*   Updated: 2016/12/19 17:40:47 by tpan             ###   ########.fr       */
+/*   Updated: 2016/12/20 01:50:53 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static void			join(t_list *node, char const *buff, size_t size)
 
 int					get_next_line(const int fd, char **line)
 {
-	int				i;
-	int				ret;
+	size_t				i;
+	size_t				ret;
 	char			*ptr;
 	char			buf[BUFF_SIZE];
 	t_list			*nd;
 
 	i = 0;
 	ret = 0;
-	MEMCHECK(fd < 0 || !(line == NULL) || read(fd, buf, 0) < 0);
+	MEMCHECK((fd < 0 || line == NULL || read(fd, buf, 0) < 0));
 	nd = read_fd(fd);
 	while (!ft_strchr(nd->content, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
 		join(nd, ft_strndup(buf, ret), ret);
