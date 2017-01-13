@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 21:03:27 by tpan              #+#    #+#             */
-/*   Updated: 2016/12/20 01:50:53 by tpan             ###   ########.fr       */
+/*   Updated: 2016/12/21 17:17:36 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void			join(t_list *node, char const *buff, size_t size)
 	if (node->content == NULL)
 	{
 		node->content = ft_strndup(buff, size);
-		return ;
 	}
 	tmp = node->content;
 	node->content = ft_strjoin(tmp, buff);
@@ -46,8 +45,8 @@ static void			join(t_list *node, char const *buff, size_t size)
 
 int					get_next_line(const int fd, char **line)
 {
-	size_t				i;
-	size_t				ret;
+	size_t			i;
+	size_t			ret;
 	char			*ptr;
 	char			buf[BUFF_SIZE];
 	t_list			*nd;
@@ -60,15 +59,15 @@ int					get_next_line(const int fd, char **line)
 		join(nd, ft_strndup(buf, ret), ret);
 	if (ret < BUFF_SIZE && ft_strlen(nd->content) == 0)
 	{
-		ft_strclr(*line);
+		ft_bzero(&line, ft_strlen(*line));
 		return (0);
 	}
 	ptr = nd->content;
 	i = ft_wordlength(ptr, i, '\n');
 	*line = (ptr[i] == '\n') ? (ft_strndup(ptr, i)) : (ft_strdup(nd->content));
 	if ((ret == 0 && ptr[i] == 0))
-		ft_strclr((char*)(nd->content));
+		ft_bzero((char*)(nd->content), ft_strlen((nd->content)));
 	nd->content = (ptr[i] == '\n') ? (ft_strdup(nd->content + (i + 1))) :
-		(nd->content + 0);
+		(nd->content);
 	return (1);
 }
