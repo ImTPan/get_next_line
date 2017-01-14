@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 21:03:27 by tpan              #+#    #+#             */
-/*   Updated: 2016/12/21 17:17:36 by tpan             ###   ########.fr       */
+/*   Updated: 2017/01/13 16:29:17 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void			join(t_list *node, char const *buff, size_t size)
 	}
 	tmp = node->content;
 	node->content = ft_strjoin(tmp, buff);
-	free((void *)buff);
 }
 
 int					get_next_line(const int fd, char **line)
@@ -59,14 +58,14 @@ int					get_next_line(const int fd, char **line)
 		join(nd, ft_strndup(buf, ret), ret);
 	if (ret < BUFF_SIZE && ft_strlen(nd->content) == 0)
 	{
-		ft_bzero(&line, ft_strlen(*line));
+		ft_strclr(*line);
 		return (0);
 	}
 	ptr = nd->content;
 	i = ft_wordlength(ptr, i, '\n');
 	*line = (ptr[i] == '\n') ? (ft_strndup(ptr, i)) : (ft_strdup(nd->content));
 	if ((ret == 0 && ptr[i] == 0))
-		ft_bzero((char*)(nd->content), ft_strlen((nd->content)));
+		ft_strclr(nd->content);
 	nd->content = (ptr[i] == '\n') ? (ft_strdup(nd->content + (i + 1))) :
 		(nd->content);
 	return (1);

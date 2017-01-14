@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 18:22:44 by tpan              #+#    #+#             */
-/*   Updated: 2016/12/20 18:52:07 by tpan             ###   ########.fr       */
+/*   Updated: 2017/01/13 16:31:13 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define BUFF_SIZE 10000
+# define BUFF_SIZE 1000
 
 # define MEMCHECK(x) if (x) return (-1);
 
