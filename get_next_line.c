@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 21:03:27 by tpan              #+#    #+#             */
-/*   Updated: 2017/01/13 16:29:17 by tpan             ###   ########.fr       */
+/*   Updated: 2017/01/20 12:22:36 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,13 @@ static void			join(t_list *node, char const *buff, size_t size)
 	{
 		node->content = ft_strndup(buff, size);
 	}
-	tmp = node->content;
-	node->content = ft_strjoin(tmp, buff);
+	else
+	{
+		tmp = node->content;
+		node->content = ft_strjoin(tmp, buff);
+		free(tmp);
+	}
+	free((void*)(buff));
 }
 
 int					get_next_line(const int fd, char **line)
