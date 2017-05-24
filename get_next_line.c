@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 14:35:43 by tpan              #+#    #+#             */
-/*   Updated: 2017/05/24 14:36:10 by tpan             ###   ########.fr       */
+/*   Updated: 2017/05/24 14:46:20 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int					get_next_line(const int fd, char **line)
 		return (0);
 	}
 	ptr = nd->content;
-	i = ft_wordcount(ptr, '\n');
+	i = ft_wordlength(ptr, '\n');
 	*line = (ptr[i] == '\n') ? (ft_strndup(ptr, i)) : (ft_strdup(nd->content));
 	if ((ret == 0 && ptr[i] == 0))
 		ft_strclr(nd->content);
