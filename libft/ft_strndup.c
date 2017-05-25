@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 14:51:12 by tpan              #+#    #+#             */
-/*   Updated: 2016/11/11 19:45:11 by tpan             ###   ########.fr       */
+/*   Updated: 2017/05/24 22:08:53 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,15 @@
 
 char	*ft_strndup(const char *s1, size_t n)
 {
-	char			*str;
-	char			*p;
-	unsigned long	i;
+	char	*result;
+	size_t	len;
 
-	i = 0;
-	if ((size_t)ft_strlen((char *)s1) < n)
-		str = (char *)malloc(sizeof(char) * ft_strlen((char *)s1) + 1);
-	else
-		str = (char *)malloc(sizeof(char) * (n + 1));
-	if (str && n)
-	{
-		p = str;
-		while (*s1 && n > i)
-		{
-			*p++ = *s1++;
-			n--;
-		}
-		*p = '\0';
-		return (str);
-	}
-	return (NULL);
+	len = ft_strlen(s1);
+	if (n < len)
+		len = n;
+	result = (char *)malloc(len + 1);
+	if (!result)
+		return (0);
+	result[len] = '\0';
+	return (char *)ft_memcpy(result, s1, len);
 }
