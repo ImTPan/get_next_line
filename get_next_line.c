@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 14:35:43 by tpan              #+#    #+#             */
-/*   Updated: 2017/05/24 14:46:20 by tpan             ###   ########.fr       */
+/*   Updated: 2017/05/24 14:58:01 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ static void			join(t_list *node, char const *buff, size_t size)
 	free((void*)(buff));
 }
 
+int		ft_wordlen(char *str, int i, char delimiter)
+{
+	while (str[i] != '\0' && str[i] != delimiter)
+	{
+		i++;
+	}
+	return i;
+}
+
 int					get_next_line(const int fd, char **line)
 {
 	size_t			i;
@@ -67,7 +76,7 @@ int					get_next_line(const int fd, char **line)
 		return (0);
 	}
 	ptr = nd->content;
-	i = ft_wordlength(ptr, '\n');
+	i = ft_wordlen(ptr, i, '\n');
 	*line = (ptr[i] == '\n') ? (ft_strndup(ptr, i)) : (ft_strdup(nd->content));
 	if ((ret == 0 && ptr[i] == 0))
 		ft_strclr(nd->content);
