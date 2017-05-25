@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 14:35:43 by tpan              #+#    #+#             */
-/*   Updated: 2017/05/24 22:17:47 by tpan             ###   ########.fr       */
+/*   Updated: 2017/05/24 22:26:30 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ int					get_next_line(const int fd, char **line)
 	*line = (ptr[i] == '\n') ? (ft_strndup(ptr, i)) : (ft_strdup(nd->content));
 	if ((ret == 0 && ptr[i] == 0))
 		ft_strclr(nd->content);
-	nd->content = (ptr[i] == '\n') ? (ft_strdup(nd->content + (i + 1))) :
-		(nd->content);
+	nd->content = (ptr[i] == '\n') ? (ft_strdup(ptr + (i + 1))) : (ptr);
 	free(ptr);
 	return (1);
 }
