@@ -6,7 +6,7 @@
 /*   By: tpan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/24 14:35:43 by tpan              #+#    #+#             */
-/*   Updated: 2017/05/24 14:58:01 by tpan             ###   ########.fr       */
+/*   Updated: 2017/05/24 21:21:24 by tpan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static t_list		*read_fd(int fd)
 	tmp = ft_lstnew("\0", 1);
 	tmp->content_size = fd;
 	ft_lstadd(&read_head, tmp);
-	return (tmp);
+	return (read_head);
 }
 
-static void			join(t_list *node, char const *buff, size_t size)
+static void			join(t_list *node, char const *buff)
 {
 	char			*tmp;
 
 	if (node->content == NULL)
 	{
-		node->content = ft_strndup(buff, size);
+		node->content = (char *)buff;
 	}
 	else
 	{
@@ -45,15 +45,6 @@ static void			join(t_list *node, char const *buff, size_t size)
 		free(tmp);
 	}
 	free((void*)(buff));
-}
-
-int		ft_wordlen(char *str, int i, char delimiter)
-{
-	while (str[i] != '\0' && str[i] != delimiter)
-	{
-		i++;
-	}
-	return i;
 }
 
 int					get_next_line(const int fd, char **line)
@@ -69,18 +60,19 @@ int					get_next_line(const int fd, char **line)
 	ERRCHECK((fd < 0 || line == NULL || read(fd, buf, 0) < 0));
 	nd = read_fd(fd);
 	while (!ft_strchr(nd->content, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
-		join(nd, ft_strndup(buf, ret), ret);
+		join(nd, ft_strndup(buf, ret));
 	if (ret < BUFF_SIZE && ft_strlen(nd->content) == 0)
 	{
 		ft_strclr(*line);
 		return (0);
 	}
 	ptr = nd->content;
-	i = ft_wordlen(ptr, i, '\n');
+	i = ft_wordlength(ptr, '\n');
 	*line = (ptr[i] == '\n') ? (ft_strndup(ptr, i)) : (ft_strdup(nd->content));
 	if ((ret == 0 && ptr[i] == 0))
-		ft_strclr(nd->content);
+		ft_strclr(ptr);
 	nd->content = (ptr[i] == '\n') ? (ft_strdup(nd->content + (i + 1))) :
-		(nd->content);
+		(ptr);
+	free(ptr);
 	return (1);
 }
